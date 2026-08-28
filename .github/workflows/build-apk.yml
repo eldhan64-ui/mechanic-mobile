@@ -7,14 +7,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
@@ -24,39 +24,22 @@ jobs:
         sudo apt-get install -y \
           build-essential \
           git \
-          ffmpeg \
-          libsdl2-dev \
-          libsdl2-image-dev \
-          libsdl2-mixer-dev \
-          libsdl2-ttf-dev \
-          libportmidi-dev \
-          libswscale-dev \
-          libavformat-dev \
-          libavcodec-dev \
-          zlib1g-dev \
-          libgstreamer1.0-dev \
-          gstreamer1.0-plugins-base \
-          gstreamer1.0-plugins-good \
           libffi-dev \
           libssl-dev \
           libtool \
           automake \
           autoconf \
-          autotools-dev \
           cmake \
           gettext \
           zip \
           unzip \
           openjdk-17-jdk \
-          pkg-config \
-          m4
+          pkg-config
 
     - name: Install Buildozer and Cython
       run: |
         pip install --upgrade pip
-        pip install cython==0.29.33
-        pip install buildozer
-        pip install git+https://github.com/kivy/python-for-android.git@master
+        pip install "cython<3.0.0" buildozer
 
     - name: Accept Android SDK licenses
       run: |
