@@ -21,11 +21,11 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y ccache git libffi-dev libssl-dev build-essential python3-dev libtool automake cmake gettext zip unzip openjdk-17-jdk
+        sudo apt-get install -y ccache git libffi-dev libssl-dev build-essential python3-dev libtool automake autoconf autotools-dev cmake gettext zip unzip openjdk-17-jdk pkg-config
         pip install --upgrade pip
         pip install buildozer cython
 
-    - name: Accept Android SDK licenses
+    - name: Accept Android SDK licenses & setup
       run: |
         yes | buildozer android debug || true
 
