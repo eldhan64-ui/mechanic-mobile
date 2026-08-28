@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
@@ -36,9 +36,9 @@ jobs:
           openjdk-17-jdk \
           pkg-config
 
-    - name: Install Buildozer and Cython
+    - name: Install Fixed Python Tools
       run: |
-        pip install --upgrade pip
+        python -m pip install --upgrade "pip<24.1" "setuptools<69.0.0"
         pip install "cython<3.0.0" buildozer
 
     - name: Accept Android SDK licenses
@@ -47,6 +47,7 @@ jobs:
 
     - name: Build with Buildozer
       run: |
+        export P4A_PIP_BUILD_ON_BUILD=0
         buildozer android debug
 
     - name: Upload APK artifact
